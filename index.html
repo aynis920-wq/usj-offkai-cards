@@ -55,7 +55,7 @@
       else{document.getElementById('lock-error').textContent='合言葉が違います😢';document.getElementById('lock-input').value='';}
     }
     document.getElementById('lock-btn').addEventListener('click',tryUnlock);
-    document.getElementById('lock-input').addEventListener('keydown',function(e){if(e.key==='Enter')tryUnlock();});
+    document.getElementById('lock-input').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.isComposing)tryUnlock();});
   })();
 </script>
 <h1>🎢 USJオフ会 参加者紹介カード</h1>
