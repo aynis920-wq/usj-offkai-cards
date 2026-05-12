@@ -235,24 +235,15 @@
       if(toc)document.documentElement.style.scrollPaddingTop=(toc.offsetHeight+8)+'px';
     });});
   }
-  function doUnlock(e){
-    if(e)e.preventDefault();
+  function doUnlock(){
     var v=document.getElementById('lock-input').value.trim();
     if(v==='ユニバ'){
-      try{sessionStorage.setItem('unlocked','1');}catch(ex){}
       unlock();
     } else {
       document.getElementById('lock-error').textContent='合言葉が違います😢';
       document.getElementById('lock-input').value='';
     }
-    return false;
   }
-  (function(){
-    var ok=false;
-    try{ok=sessionStorage.getItem('unlocked')==='1';}catch(e){}
-    try{if(!ok && decodeURIComponent(location.hash)==='#ユニバ') ok=true;}catch(e){}
-    if(ok)unlock();
-  })();
 </script>
 </body>
 </html>
