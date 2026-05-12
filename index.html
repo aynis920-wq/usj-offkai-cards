@@ -46,19 +46,6 @@
   <button id="lock-btn" type="button">開く</button>
   <div id="lock-error"></div>
 </div>
-<script>
-  (function(){
-    function unlock(){document.getElementById('lock-screen').style.display='none';document.getElementById('main-content').style.display='';}
-    if(sessionStorage.getItem('unlocked')==='1'){unlock();return;}
-    function tryUnlock(){
-      var v=document.getElementById('lock-input').value.trim();
-      if(v==='ユニバ'){sessionStorage.setItem('unlocked','1');unlock();}
-      else{document.getElementById('lock-error').textContent='合言葉が違います😢';document.getElementById('lock-input').value='';}
-    }
-    document.getElementById('lock-btn').addEventListener('click',tryUnlock);
-    document.getElementById('lock-input').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.isComposing)tryUnlock();});
-  })();
-</script>
 <div id="main-content" style="display:none">
 <h1>🎢 USJオフ会 参加者紹介カード</h1>
 <p class="subtitle">ユニバオフ会楽しむばい！ ― 参加者9名</p>
@@ -239,5 +226,18 @@
   window.addEventListener('resize', updateScrollPadding);
 </script>
 </div>
+<script>
+  (function(){
+    function unlock(){document.getElementById('lock-screen').style.display='none';document.getElementById('main-content').style.display='';requestAnimationFrame(function(){requestAnimationFrame(function(){var toc=document.querySelector('.toc');if(toc)document.documentElement.style.scrollPaddingTop=(toc.offsetHeight+8)+'px';});});}
+    if(sessionStorage.getItem('unlocked')==='1'){unlock();return;}
+    function tryUnlock(){
+      var v=document.getElementById('lock-input').value.trim();
+      if(v==='ユニバ'){sessionStorage.setItem('unlocked','1');unlock();}
+      else{document.getElementById('lock-error').textContent='合言葉が違います😢';document.getElementById('lock-input').value='';}
+    }
+    document.getElementById('lock-btn').addEventListener('click',tryUnlock);
+    document.getElementById('lock-input').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.isComposing)tryUnlock();});
+  })();
+</script>
 </body>
 </html>
