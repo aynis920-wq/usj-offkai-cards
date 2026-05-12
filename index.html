@@ -43,21 +43,23 @@
   <h2>USJオフ会<br>参加者紹介カード</h2>
   <p>合言葉を入力してね！</p>
   <input id="lock-input" type="text" placeholder="合言葉" autocomplete="off">
-  <button id="lock-btn">開く</button>
+  <button id="lock-btn" type="button">開く</button>
   <div id="lock-error"></div>
 </div>
 <script>
   (function(){
-    if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('lock-screen').style.display='none';return;}
+    function unlock(){document.getElementById('lock-screen').style.display='none';document.getElementById('main-content').style.display='';}
+    if(sessionStorage.getItem('unlocked')==='1'){unlock();return;}
     function tryUnlock(){
       var v=document.getElementById('lock-input').value.trim();
-      if(v==='ユニバ'){sessionStorage.setItem('unlocked','1');document.getElementById('lock-screen').style.display='none';}
+      if(v==='ユニバ'){sessionStorage.setItem('unlocked','1');unlock();}
       else{document.getElementById('lock-error').textContent='合言葉が違います😢';document.getElementById('lock-input').value='';}
     }
     document.getElementById('lock-btn').addEventListener('click',tryUnlock);
     document.getElementById('lock-input').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.isComposing)tryUnlock();});
   })();
 </script>
+<div id="main-content" style="display:none">
 <h1>🎢 USJオフ会 参加者紹介カード</h1>
 <p class="subtitle">ユニバオフ会楽しむばい！ ― 参加者9名</p>
 <div class="toc">
@@ -236,5 +238,6 @@
   updateScrollPadding();
   window.addEventListener('resize', updateScrollPadding);
 </script>
+</div>
 </body>
 </html>
