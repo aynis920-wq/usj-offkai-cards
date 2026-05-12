@@ -44,7 +44,7 @@
   <h2>USJオフ会<br>参加者紹介カード</h2>
   <p>合言葉を入力してね！</p>
   <input id="lock-input" type="text" placeholder="合言葉" autocomplete="off">
-  <button id="lock-btn" type="button">開く</button>
+  <button id="lock-btn" type="button" onclick="tryUnlock()">開く</button>
   <div id="lock-error"></div>
 </div>
 <div id="main-content" style="display:none">
@@ -228,15 +228,28 @@
 </script>
 </div>
 <script>
-  (function(){
-    function unlock(){document.getElementById('lock-screen').style.display='none';document.getElementById('main-content').style.display='';requestAnimationFrame(function(){requestAnimationFrame(function(){var toc=document.querySelector('.toc');if(toc)document.documentElement.style.scrollPaddingTop=(toc.offsetHeight+8)+'px';});});}
-    if(sessionStorage.getItem('unlocked')==='1'){unlock();return;}
-    function tryUnlock(){
-      var v=document.getElementById('lock-input').value.trim();
-      if(v==='ユニバ'){sessionStorage.setItem('unlocked','1');unlock();}
-      else{document.getElementById('lock-error').textContent='合言葉が違います😢';document.getElementById('lock-input').value='';}
+  function unlock(){
+    document.getElementById('lock-screen').style.display='none';
+    document.getElementById('main-content').style.display='';
+    requestAnimationFrame(function(){requestAnimationFrame(function(){
+      var toc=document.querySelector('.toc');
+      if(toc)document.documentElement.style.scrollPaddingTop=(toc.offsetHeight+8)+'px';
+    });});
+  }
+  function tryUnlock(){
+    var v=document.getElementById('lock-input').value.trim();
+    if(v==='ユニバ'){
+      try{sessionStorage.setItem('unlocked','1');}catch(e){}
+      unlock();
+    } else {
+      document.getElementById('lock-error').textContent='合言葉が違います😢';
+      document.getElementById('lock-input').value='';
     }
-    document.getElementById('lock-btn').addEventListener('click',tryUnlock);
+  }
+  (function(){
+    var ok=false;
+    try{ok=sessionStorage.getItem('unlocked')==='1';}catch(e){}
+    if(ok){unlock();return;}
     document.getElementById('lock-input').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.isComposing)tryUnlock();});
   })();
 </script>
