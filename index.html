@@ -273,12 +273,10 @@
 </div>
 <p style="text-align:center;color:#999;font-size:.75rem;margin:8px 0 20px;">🎢 USJオフ会 楽しんでいきましょう！</p>
 <script>
-  function updateScrollPadding() {
-    const toc = document.querySelector('.sticky-header');
-    if (toc) document.documentElement.style.scrollPaddingTop = toc.offsetHeight + 'px';
-  }
-  updateScrollPadding();
-  window.addEventListener('resize', updateScrollPadding);
+  window.addEventListener('resize', function(){
+    var h = document.querySelector('.sticky-header');
+    if (h) document.documentElement.style.scrollPaddingTop = h.offsetHeight + 'px';
+  });
 </script>
 </div>
 <script>
@@ -286,8 +284,8 @@
     document.getElementById('lock-screen').style.display='none';
     document.getElementById('main-content').style.display='';
     requestAnimationFrame(function(){requestAnimationFrame(function(){
-      var toc=document.querySelector('.toc');
-      if(toc)document.documentElement.style.scrollPaddingTop=toc.offsetHeight+'px';
+      var h=document.querySelector('.sticky-header');
+      if(h)document.documentElement.style.scrollPaddingTop=h.offsetHeight+'px';
     });});
   }
   function doUnlock(){
