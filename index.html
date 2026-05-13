@@ -8,9 +8,10 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-padding-top: 200px; }
   body { font-family: 'Hiragino Sans', 'BIZ UDPGothic', 'Meiryo', sans-serif; background: #f0f4ff; min-height: 100vh; padding: 12px; }
-  h1 { text-align:center; color:#1a237e; font-size:1.2rem; padding:14px 8px 6px; }
-  .subtitle { text-align:center; color:#555; font-size:0.82rem; margin-bottom:18px; }
-  .toc { background:#fff; border-radius:14px; padding:10px 16px; margin-bottom:20px; box-shadow:0 2px 10px rgba(0,0,0,.15); position:sticky; top:0; z-index:100; }
+  .sticky-header { position:sticky; top:0; z-index:100; background:#f0f4ff; padding-bottom:4px; box-shadow:0 2px 10px rgba(0,0,0,.12); }
+  h1 { text-align:center; color:#1a237e; font-size:1.2rem; padding:10px 8px 4px; }
+  .subtitle { text-align:center; color:#555; font-size:0.82rem; margin-bottom:8px; }
+  .toc { background:#fff; border-radius:14px; padding:10px 16px; margin-bottom:0; box-shadow:none; }
   .toc-title { font-size:.85rem; font-weight:bold; color:#1a237e; margin-bottom:10px; text-align:center; }
   .toc-list { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
   .toc-item { font-size:.78rem; padding:5px 12px; border-radius:20px; color:#fff; text-decoration:none; font-weight:bold; white-space:nowrap; }
@@ -98,11 +99,13 @@
   <div id="lock-error"></div>
 </div>
 <div id="main-content" style="display:none">
+<div class="sticky-header">
 <h1>🎢 USJオフ会 参加者紹介カード</h1>
 <p class="subtitle">ユニバオフ会楽しむばい！ ― 参加者9名</p>
 <div class="toc">
   <div class="toc-title">👥 参加者一覧</div>
   <div class="toc-list"><a class="toc-item" style="background:#E65100" href="#card1">まさはな</a><a class="toc-item" style="background:#7B1FA2" href="#card2">なおちゃん</a><a class="toc-item" style="background:#2E7D32" href="#card4">はここ</a><a class="toc-item" style="background:#C2185B" href="#card5">ふくふく</a><a class="toc-item" style="background:#1565C0" href="#card6">ハウディ</a><a class="toc-item" style="background:#283593" href="#card7">まき</a><a class="toc-item" style="background:#00695C" href="#card8">みゆみゆ</a><a class="toc-item" style="background:#F9A825" href="#card9">リヨン</a><a class="toc-item" style="background:#F57F17" href="#card3">コンちゃん</a></div>
+</div>
 </div>
 
 <div id="card1" class="card" style="--accent:#E65100; --bg:#FFF3E0;">
@@ -271,7 +274,7 @@
 <p style="text-align:center;color:#999;font-size:.75rem;margin:8px 0 20px;">🎢 USJオフ会 楽しんでいきましょう！</p>
 <script>
   function updateScrollPadding() {
-    const toc = document.querySelector('.toc');
+    const toc = document.querySelector('.sticky-header');
     if (toc) document.documentElement.style.scrollPaddingTop = (toc.offsetHeight + 8) + 'px';
   }
   updateScrollPadding();
