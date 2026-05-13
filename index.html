@@ -280,17 +280,39 @@
     if(h&&mc) mc.style.paddingTop=h.offsetHeight+'px';
   }
   window.addEventListener('resize',applyHeaderPad);
+  function resetTop(){
+    applyHeaderPad();
+    window.scrollTo(0,0);
+    document.documentElement.scrollTop=0;
+    document.body.scrollTop=0;
+  }
   function unlock(){
     document.getElementById('lock-input').blur();
     document.getElementById('lock-screen').style.display='none';
     var mc=document.getElementById('main-content');
     mc.style.display='';
-    // fixed headerの高さ分だけpadding-topを付けてカードをヘッダーの下に出す
-    // スクロール位置やタイミングに依存しない確実な方法
-    requestAnimationFrame(function(){
-      applyHeaderPad();
-      window.scrollTo(0,0);
-    });
+    resetTop();
+    // visualViewport API（iOS Safari対応）でキーボードが完全に閉じたら再リセット
+    if(window.visualViewport){
+      var vv=window.visualViewport;
+      var fullH=vv.height; // blur直後は既に少し戻り始めている場合もある
+      function onVVResize(){
+        resetTop();
+        // キーボードが完全に収納されたら（高さが増加して変化が止まったら）終了
+        if(vv.height>=fullH){
+          vv.removeEventListener('resize',onVVResize);
+          resetTop();
+        } else {
+          fullH=vv.height;
+        }
+      }
+      vv.addEventListener('resize',onVVResize);
+      // 最大1秒後に強制終了 & 最終リセット
+      setTimeout(function(){ vv.removeEventListener('resize',onVVResize); resetTop(); },1000);
+    } else {
+      // フォールバック: 100ms×8回
+      var n=0; var t=setInterval(function(){ resetTop(); if(++n>=8)clearInterval(t); },100);
+    }
     // TOCリンクをクリックした瞬間にヘッダー高さを測って手動スクロール
     document.querySelectorAll('.toc-list a[href^="#"]').forEach(function(a){
       a.addEventListener('click',function(e){
