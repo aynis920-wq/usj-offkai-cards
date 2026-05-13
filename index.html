@@ -280,13 +280,28 @@
 </script>
 </div>
 <script>
+  function setScrollPad(){
+    var h=document.querySelector('.sticky-header');
+    if(h)document.documentElement.style.scrollPaddingTop=h.offsetHeight+'px';
+  }
   function unlock(){
     document.getElementById('lock-screen').style.display='none';
     document.getElementById('main-content').style.display='';
-    requestAnimationFrame(function(){requestAnimationFrame(function(){
-      var h=document.querySelector('.sticky-header');
-      if(h)document.documentElement.style.scrollPaddingTop=h.offsetHeight+'px';
-    });});
+    // ResizeObserverでヘッダー高さが落ち着いたら即反映（キーボード収納後も対応）
+    var h=document.querySelector('.sticky-header');
+    if(h){
+      setScrollPad();
+      if(window.ResizeObserver){
+        var ro=new ResizeObserver(function(){ setScrollPad(); });
+        ro.observe(h);
+        // 3秒後に監視終了（初期表示後は resize イベントで対応）
+        setTimeout(function(){ ro.disconnect(); },3000);
+      } else {
+        // フォールバック：100ms×5回計測
+        var n=0;
+        var t=setInterval(function(){ setScrollPad(); if(++n>=5)clearInterval(t); },100);
+      }
+    }
   }
   function doUnlock(){
     var v=document.getElementById('lock-input').value.trim();
