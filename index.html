@@ -40,7 +40,10 @@
 </head>
 <body>
 <div id="lock-screen">
-  <div style="font-size:3rem;margin-bottom:16px;">🎢</div>
+  <div style="width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,#003087,#0057B7);border:4px solid #FFD700;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:20px;box-shadow:0 0 28px rgba(255,215,0,0.45);">
+    <div style="font-size:1.45rem;font-weight:900;color:#FFD700;letter-spacing:0.1em;line-height:1;">USJ</div>
+    <div style="font-size:0.48rem;font-weight:700;color:rgba(255,215,0,0.85);letter-spacing:0.06em;margin-top:3px;">UNIVERSAL STUDIOS</div>
+  </div>
   <h2>USJオフ会<br>参加者紹介カード</h2>
   <p>合言葉を入力してね！</p>
   <input id="lock-input" type="text" placeholder="合言葉" autocomplete="off" onkeydown="if(event.key==='Enter'&&!event.isComposing)doUnlock()">
