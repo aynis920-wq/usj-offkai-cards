@@ -97,7 +97,7 @@
   <button type="button" onclick="doUnlock()">開く</button>
   <div id="lock-error"></div>
 </div>
-<div id="main-content" style="display:none">
+<div id="main-content" style="visibility:hidden">
 <div class="sticky-header">
 <h1>🎢 USJオフ会 参加者紹介カード</h1>
 <p class="subtitle">ユニバオフ会楽しむばい！ ― 参加者9名</p>
@@ -274,13 +274,9 @@
 </div>
 <script>
   function unlock(){
-    document.getElementById('lock-input').blur();
     document.getElementById('lock-screen').style.display='none';
-    document.getElementById('main-content').style.display='';
-    // scroll-behavior:smoothをCSSから除いたので即時スクロールが確実に効く
-    window.scrollTo(0,0);
-    document.documentElement.scrollTop=0;
-    document.body.scrollTop=0;
+    // visibility:hiddenを解除するだけ → スクロール位置は最初から0のまま、ズレない
+    document.getElementById('main-content').style.visibility='visible';
     // TOCリンク：クリック時にヘッダー高さを測ってスムーズスクロール
     document.querySelectorAll('.toc-list a[href^="#"]').forEach(function(a){
       a.addEventListener('click',function(e){
