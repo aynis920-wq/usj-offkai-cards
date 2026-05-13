@@ -6,9 +6,8 @@
 <title>🎢 USJオフ会 参加者紹介カード</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
   body { font-family: 'Hiragino Sans', 'BIZ UDPGothic', 'Meiryo', sans-serif; background: #f0f4ff; min-height: 100vh; padding: 0 12px 12px; }
-  .sticky-header { position:fixed; top:0; left:0; right:0; z-index:100; background:#f0f4ff; padding:10px 12px 4px; box-shadow:0 2px 10px rgba(0,0,0,.12); }
+  .sticky-header { position:sticky; top:0; z-index:100; background:#f0f4ff; padding:10px 0 4px; box-shadow:0 2px 10px rgba(0,0,0,.12); }
   h1 { text-align:center; color:#1a237e; font-size:1.2rem; padding:0 8px 4px; }
   .subtitle { text-align:center; color:#555; font-size:0.82rem; margin-bottom:8px; }
   .toc { background:#fff; border-radius:14px; padding:10px 16px; margin-bottom:0; box-shadow:none; }
@@ -274,53 +273,15 @@
 <p style="text-align:center;color:#999;font-size:.75rem;margin:8px 0 20px;">🎢 USJオフ会 楽しんでいきましょう！</p>
 </div>
 <script>
-  function applyHeaderPad(){
-    var h=document.querySelector('.sticky-header');
-    var mc=document.getElementById('main-content');
-    if(h&&mc) mc.style.paddingTop=h.offsetHeight+'px';
-  }
-  window.addEventListener('resize',applyHeaderPad);
-  function resetTop(){
-    applyHeaderPad();
-    // scroll-behavior:smoothが干渉しないよう一時的にautoに切り替え
-    document.documentElement.style.scrollBehavior='auto';
-    document.body.style.scrollBehavior='auto';
-    window.scrollTo(0,0);
-    document.documentElement.scrollTop=0;
-    document.body.scrollTop=0;
-    setTimeout(function(){
-      document.documentElement.style.scrollBehavior='';
-      document.body.style.scrollBehavior='';
-    },50);
-  }
   function unlock(){
     document.getElementById('lock-input').blur();
     document.getElementById('lock-screen').style.display='none';
-    var mc=document.getElementById('main-content');
-    mc.style.display='';
-    resetTop();
-    // visualViewport API（iOS Safari対応）でキーボードが完全に閉じたら再リセット
-    if(window.visualViewport){
-      var vv=window.visualViewport;
-      var fullH=vv.height; // blur直後は既に少し戻り始めている場合もある
-      function onVVResize(){
-        resetTop();
-        // キーボードが完全に収納されたら（高さが増加して変化が止まったら）終了
-        if(vv.height>=fullH){
-          vv.removeEventListener('resize',onVVResize);
-          resetTop();
-        } else {
-          fullH=vv.height;
-        }
-      }
-      vv.addEventListener('resize',onVVResize);
-      // 最大1秒後に強制終了 & 最終リセット
-      setTimeout(function(){ vv.removeEventListener('resize',onVVResize); resetTop(); },1000);
-    } else {
-      // フォールバック: 100ms×8回
-      var n=0; var t=setInterval(function(){ resetTop(); if(++n>=8)clearInterval(t); },100);
-    }
-    // TOCリンクをクリックした瞬間にヘッダー高さを測って手動スクロール
+    document.getElementById('main-content').style.display='';
+    // scroll-behavior:smoothをCSSから除いたので即時スクロールが確実に効く
+    window.scrollTo(0,0);
+    document.documentElement.scrollTop=0;
+    document.body.scrollTop=0;
+    // TOCリンク：クリック時にヘッダー高さを測ってスムーズスクロール
     document.querySelectorAll('.toc-list a[href^="#"]').forEach(function(a){
       a.addEventListener('click',function(e){
         e.preventDefault();
