@@ -274,8 +274,13 @@
 </div>
 <script>
   function unlock(){
+    document.getElementById('lock-input').blur();
     document.getElementById('lock-screen').style.display='none';
-    // visibility:hiddenを解除するだけ → スクロール位置は最初から0のまま、ズレない
+    // visibility:hidden中はレイアウトが存在するのでscrollToが確実に効く
+    // コンテンツを見せる前にリセットすることでズレを防ぐ
+    window.scrollTo(0,0);
+    document.documentElement.scrollTop=0;
+    document.body.scrollTop=0;
     document.getElementById('main-content').style.visibility='visible';
     // TOCリンク：クリック時にヘッダー高さを測ってスムーズスクロール
     document.querySelectorAll('.toc-list a[href^="#"]').forEach(function(a){
