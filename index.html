@@ -40,9 +40,36 @@
 </head>
 <body>
 <div id="lock-screen">
-  <div style="width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,#003087,#0057B7);border:4px solid #FFD700;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:20px;box-shadow:0 0 28px rgba(255,215,0,0.45);">
-    <div style="font-size:1.45rem;font-weight:900;color:#FFD700;letter-spacing:0.1em;line-height:1;">USJ</div>
-    <div style="font-size:0.48rem;font-weight:700;color:rgba(255,215,0,0.85);letter-spacing:0.06em;margin-top:3px;">UNIVERSAL STUDIOS</div>
+  <div style="margin-bottom:20px;filter:drop-shadow(0 0 16px rgba(255,215,0,0.5));">
+    <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="globe-clip">
+          <circle cx="50" cy="50" r="46"/>
+        </clipPath>
+        <radialGradient id="globe-grad" cx="38%" cy="35%" r="60%">
+          <stop offset="0%" stop-color="#1565C0"/>
+          <stop offset="100%" stop-color="#0A2472"/>
+        </radialGradient>
+      </defs>
+      <!-- 地球本体 -->
+      <circle cx="50" cy="50" r="46" fill="url(#globe-grad)"/>
+      <!-- 緯線 -->
+      <g clip-path="url(#globe-clip)" stroke="#FFD700" stroke-width="1.2" fill="none" opacity="0.7">
+        <line x1="4" y1="50" x2="96" y2="50"/>
+        <ellipse cx="50" cy="50" rx="46" ry="14"/>
+        <ellipse cx="50" cy="50" rx="46" ry="28"/>
+        <line x1="4" y1="28" x2="96" y2="28"/>
+        <line x1="4" y1="72" x2="96" y2="72"/>
+      </g>
+      <!-- 経線 -->
+      <g clip-path="url(#globe-clip)" stroke="#FFD700" stroke-width="1.2" fill="none" opacity="0.7">
+        <ellipse cx="50" cy="50" rx="14" ry="46"/>
+        <ellipse cx="50" cy="50" rx="28" ry="46"/>
+        <line x1="50" y1="4" x2="50" y2="96"/>
+      </g>
+      <!-- 外枠 -->
+      <circle cx="50" cy="50" r="46" fill="none" stroke="#FFD700" stroke-width="3"/>
+    </svg>
   </div>
   <h2>USJオフ会<br>参加者紹介カード</h2>
   <p>合言葉を入力してね！</p>
