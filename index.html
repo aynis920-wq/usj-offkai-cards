@@ -275,9 +275,13 @@
 </div>
 <script>
   function unlock(){
+    // キーボードを先に閉じる（閉じきる前にscrollToすると位置がズレるため）
+    document.getElementById('lock-input').blur();
     document.getElementById('lock-screen').style.display='none';
     document.getElementById('main-content').style.display='';
     window.scrollTo(0,0);
+    // キーボードが完全に閉じた後（約300ms）に再度リセット
+    setTimeout(function(){ window.scrollTo(0,0); }, 300);
     // TOCリンクをクリックした瞬間にヘッダー高さを測って手動スクロール
     document.querySelectorAll('.toc-list a[href^="#"]').forEach(function(a){
       a.addEventListener('click',function(e){
