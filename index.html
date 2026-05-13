@@ -273,7 +273,11 @@
 <p style="text-align:center;color:#999;font-size:.75rem;margin:8px 0 20px;">🎢 USJオフ会 楽しんでいきましょう！</p>
 </div>
 <script>
-  // 認証済みなら即座にコンテンツを表示（再読み込み後はスクロール位置が必ず0）
+  // スクロール位置の自動復元を無効化（ホーム画面ショートカットでも確実に先頭から）
+  if('scrollRestoration' in history) history.scrollRestoration='manual';
+  window.scrollTo(0,0);
+
+  // 認証済みなら即座にコンテンツを表示
   (function(){
     try{
       if(sessionStorage.getItem('unlocked')==='1'){
