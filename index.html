@@ -277,6 +277,7 @@
   function unlock(){
     document.getElementById('lock-screen').style.display='none';
     document.getElementById('main-content').style.display='';
+    window.scrollTo(0,0);
     // TOCリンクをクリックした瞬間にヘッダー高さを測って手動スクロール
     document.querySelectorAll('.toc-list a[href^="#"]').forEach(function(a){
       a.addEventListener('click',function(e){
