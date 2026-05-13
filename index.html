@@ -272,36 +272,22 @@
   </div>
 </div>
 <p style="text-align:center;color:#999;font-size:.75rem;margin:8px 0 20px;">🎢 USJオフ会 楽しんでいきましょう！</p>
-<script>
-  window.addEventListener('resize', function(){
-    var h = document.querySelector('.sticky-header');
-    if (h) document.documentElement.style.scrollPaddingTop = h.offsetHeight + 'px';
-  });
-</script>
 </div>
 <script>
-  function setScrollPad(){
-    var h=document.querySelector('.sticky-header');
-    if(h)document.documentElement.style.scrollPaddingTop=h.offsetHeight+'px';
-  }
   function unlock(){
     document.getElementById('lock-screen').style.display='none';
     document.getElementById('main-content').style.display='';
-    // ResizeObserverでヘッダー高さが落ち着いたら即反映（キーボード収納後も対応）
-    var h=document.querySelector('.sticky-header');
-    if(h){
-      setScrollPad();
-      if(window.ResizeObserver){
-        var ro=new ResizeObserver(function(){ setScrollPad(); });
-        ro.observe(h);
-        // 3秒後に監視終了（初期表示後は resize イベントで対応）
-        setTimeout(function(){ ro.disconnect(); },3000);
-      } else {
-        // フォールバック：100ms×5回計測
-        var n=0;
-        var t=setInterval(function(){ setScrollPad(); if(++n>=5)clearInterval(t); },100);
-      }
-    }
+    // TOCリンクをクリックした瞬間にヘッダー高さを測って手動スクロール
+    document.querySelectorAll('.toc-list a[href^="#"]').forEach(function(a){
+      a.addEventListener('click',function(e){
+        e.preventDefault();
+        var target=document.querySelector(a.getAttribute('href'));
+        if(!target)return;
+        var headerH=document.querySelector('.sticky-header').offsetHeight;
+        var top=target.getBoundingClientRect().top+window.pageYOffset-headerH;
+        window.scrollTo({top:top,behavior:'smooth'});
+      });
+    });
   }
   function doUnlock(){
     var v=document.getElementById('lock-input').value.trim();
