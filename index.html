@@ -282,9 +282,16 @@
   window.addEventListener('resize',applyHeaderPad);
   function resetTop(){
     applyHeaderPad();
+    // scroll-behavior:smoothが干渉しないよう一時的にautoに切り替え
+    document.documentElement.style.scrollBehavior='auto';
+    document.body.style.scrollBehavior='auto';
     window.scrollTo(0,0);
     document.documentElement.scrollTop=0;
     document.body.scrollTop=0;
+    setTimeout(function(){
+      document.documentElement.style.scrollBehavior='';
+      document.body.style.scrollBehavior='';
+    },50);
   }
   function unlock(){
     document.getElementById('lock-input').blur();
