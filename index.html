@@ -40,51 +40,55 @@
 </head>
 <body>
 <div id="lock-screen">
-  <div style="margin-bottom:20px;filter:drop-shadow(0 0 22px rgba(255,210,0,0.65));">
-    <svg width="114" height="114" viewBox="0 0 114 114" xmlns="http://www.w3.org/2000/svg">
+  <div style="margin-bottom:16px;">
+    <svg width="200" height="148" viewBox="0 0 200 148" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <clipPath id="gc"><circle cx="57" cy="57" r="51"/></clipPath>
-        <radialGradient id="gg" cx="36%" cy="30%" r="70%">
-          <stop offset="0%" stop-color="#2568C8"/>
-          <stop offset="55%" stop-color="#0C3A90"/>
-          <stop offset="100%" stop-color="#051640"/>
+        <clipPath id="gc"><circle cx="100" cy="82" r="44"/></clipPath>
+        <radialGradient id="gg" cx="38%" cy="32%" r="68%">
+          <stop offset="0%" stop-color="#2272D8"/>
+          <stop offset="100%" stop-color="#061840"/>
         </radialGradient>
+        <path id="arc1" d="M 2,126 A 106,106 0 0,1 198,126"/>
+        <path id="arc2" d="M 55,116 A 50,50 0 0,0 145,116"/>
       </defs>
       <!-- 地球本体 -->
-      <circle cx="57" cy="57" r="51" fill="url(#gg)"/>
-      <!-- グリッド線 -->
-      <g clip-path="url(#gc)" stroke="#5A9ADA" stroke-width="0.65" fill="none" opacity="0.4">
-        <line x1="6" y1="57" x2="108" y2="57"/>
-        <line x1="6" y1="40" x2="108" y2="40"/>
-        <line x1="6" y1="74" x2="108" y2="74"/>
-        <line x1="6" y1="24" x2="108" y2="24"/>
-        <line x1="6" y1="90" x2="108" y2="90"/>
-        <ellipse cx="57" cy="57" rx="51" ry="17"/>
-        <ellipse cx="57" cy="57" rx="51" ry="34"/>
-        <line x1="57" y1="6" x2="57" y2="108"/>
-        <ellipse cx="57" cy="57" rx="17" ry="51"/>
-        <ellipse cx="57" cy="57" rx="34" ry="51"/>
+      <circle cx="100" cy="82" r="44" fill="url(#gg)"/>
+      <!-- グリッド -->
+      <g clip-path="url(#gc)" stroke="#4A88CC" stroke-width="0.6" fill="none" opacity="0.35">
+        <line x1="56" y1="82" x2="144" y2="82"/>
+        <ellipse cx="100" cy="82" rx="44" ry="14"/>
+        <ellipse cx="100" cy="82" rx="44" ry="28"/>
+        <line x1="56" y1="64" x2="144" y2="64"/>
+        <line x1="56" y1="100" x2="144" y2="100"/>
+        <line x1="100" y1="38" x2="100" y2="126"/>
+        <ellipse cx="100" cy="82" rx="14" ry="44"/>
+        <ellipse cx="100" cy="82" rx="28" ry="44"/>
       </g>
-      <!-- 北アメリカ -->
-      <path clip-path="url(#gc)" fill="#C9A020" opacity="0.93"
-        d="M16,18 Q22,12 30,14 Q36,18 36,26 Q38,33 35,40 Q37,46 34,52 Q31,58 27,60 Q23,55 20,48 Q16,40 15,32 Q14,24 16,18Z"/>
-      <!-- 南アメリカ -->
-      <path clip-path="url(#gc)" fill="#C9A020" opacity="0.93"
-        d="M23,65 Q30,62 35,67 Q39,73 38,82 Q36,90 30,96 Q24,98 19,93 Q14,85 15,76 Q17,68 23,65Z"/>
+      <!-- 北米 -->
+      <path clip-path="url(#gc)" fill="#4E9020" d="M63,43 Q73,37 81,42 Q87,49 85,59 Q88,67 84,75 Q80,81 74,82 Q69,76 66,67 Q61,57 61,50Z"/>
+      <!-- 南米 -->
+      <path clip-path="url(#gc)" fill="#4E9020" d="M67,91 Q77,86 82,94 Q86,102 84,113 Q80,121 73,124 Q65,122 61,114 Q57,104 60,96Z"/>
       <!-- ヨーロッパ -->
-      <path clip-path="url(#gc)" fill="#C9A020" opacity="0.93"
-        d="M55,10 Q62,8 68,13 Q72,19 70,26 Q66,30 60,28 Q55,23 54,16 Q54,12 55,10Z"/>
+      <path clip-path="url(#gc)" fill="#5EA828" d="M103,41 Q113,36 120,43 Q124,50 121,58 Q115,63 108,59 Q103,52 103,42Z"/>
       <!-- アフリカ -->
-      <path clip-path="url(#gc)" fill="#C9A020" opacity="0.93"
-        d="M55,33 Q65,29 72,36 Q78,44 77,57 Q78,68 74,78 Q69,87 62,91 Q55,93 50,86 Q44,76 45,63 Q45,50 49,42 Q52,35 55,33Z"/>
+      <path clip-path="url(#gc)" fill="#5EA828" d="M103,65 Q116,59 123,68 Q129,79 126,94 Q122,107 114,112 Q107,115 101,108 Q94,97 95,84 Q96,71 103,65Z"/>
       <!-- アジア -->
-      <path clip-path="url(#gc)" fill="#C9A020" opacity="0.93"
-        d="M76,12 Q86,8 94,16 Q100,24 97,34 Q91,40 82,36 Q76,30 75,21 Q75,15 76,12Z"/>
-      <!-- UNIVERSALテキスト（帯状） -->
-      <rect clip-path="url(#gc)" x="6" y="49" width="102" height="18" fill="rgba(0,0,0,0.28)"/>
-      <text x="57" y="62" font-family="Arial Black,Impact,sans-serif" font-size="12" font-weight="900" fill="#FFE030" text-anchor="middle" letter-spacing="1">UNIVERSAL</text>
-      <!-- 外枠 -->
-      <circle cx="57" cy="57" r="51" fill="none" stroke="#FFD700" stroke-width="2.8"/>
+      <path clip-path="url(#gc)" fill="#6AB830" d="M126,40 Q137,34 145,42 Q149,51 146,61 Q139,66 131,61 Q125,54 125,45Z"/>
+      <!-- 金の輪 (外側) -->
+      <ellipse cx="100" cy="82" rx="57" ry="13" fill="none" stroke="#7A5000" stroke-width="11" transform="rotate(-10,100,82)"/>
+      <!-- 金の輪 (内側ハイライト) -->
+      <ellipse cx="100" cy="82" rx="57" ry="13" fill="none" stroke="#FFD700" stroke-width="7" transform="rotate(-10,100,82)"/>
+      <ellipse cx="100" cy="82" rx="57" ry="13" fill="none" stroke="#FFF0A0" stroke-width="2" transform="rotate(-10,100,82)"/>
+      <!-- UNIVERSAL STUDIOS -->
+      <text font-family="Arial Black,Impact,sans-serif" font-size="19" font-weight="900" fill="#FFD700" stroke="#6B3000" stroke-width="2.5" paint-order="stroke">
+        <textPath href="#arc1" startOffset="50%" text-anchor="middle">UNIVERSAL STUDIOS</textPath>
+      </text>
+      <!-- JAPAN -->
+      <text font-family="Arial Black,Impact,sans-serif" font-size="15.5" font-weight="900" fill="#DD1100" stroke="#FFD700" stroke-width="2.5" paint-order="stroke">
+        <textPath href="#arc2" startOffset="50%" text-anchor="middle">JAPAN</textPath>
+      </text>
+      <!-- 地球の縁 -->
+      <circle cx="100" cy="82" r="44" fill="none" stroke="#FFD700" stroke-width="1.5"/>
     </svg>
   </div>
   <h2>USJオフ会<br>参加者紹介カード</h2>
