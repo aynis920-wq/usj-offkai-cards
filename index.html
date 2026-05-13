@@ -273,16 +273,19 @@
 <p style="text-align:center;color:#999;font-size:.75rem;margin:8px 0 20px;">🎢 USJオフ会 楽しんでいきましょう！</p>
 </div>
 <script>
-  function unlock(){
-    document.getElementById('lock-input').blur();
-    document.getElementById('lock-screen').style.display='none';
-    // visibility:hidden中はレイアウトが存在するのでscrollToが確実に効く
-    // コンテンツを見せる前にリセットすることでズレを防ぐ
-    window.scrollTo(0,0);
-    document.documentElement.scrollTop=0;
-    document.body.scrollTop=0;
-    document.getElementById('main-content').style.visibility='visible';
-    // TOCリンク：クリック時にヘッダー高さを測ってスムーズスクロール
+  // 認証済みなら即座にコンテンツを表示（再読み込み後はスクロール位置が必ず0）
+  (function(){
+    try{
+      if(sessionStorage.getItem('unlocked')==='1'){
+        document.getElementById('lock-screen').style.display='none';
+        document.getElementById('main-content').style.visibility='visible';
+        // TOCリンクを設定
+        setupToc();
+      }
+    }catch(e){}
+  })();
+
+  function setupToc(){
     document.querySelectorAll('.toc-list a[href^="#"]').forEach(function(a){
       a.addEventListener('click',function(e){
         e.preventDefault();
@@ -294,12 +297,14 @@
       });
     });
   }
+
   function doUnlock(){
     var v=document.getElementById('lock-input').value.trim();
-    // カタカナ・ひらがな両方対応
     var kata=v.replace(/[ぁ-ゖ]/g,function(c){return String.fromCharCode(c.charCodeAt(0)+0x60);});
     if(kata==='ユニバ'){
-      unlock();
+      // sessionStorageに保存して再読み込み → スクロールが確実に0から始まる
+      try{ sessionStorage.setItem('unlocked','1'); }catch(e){}
+      location.reload();
     } else {
       document.getElementById('lock-error').textContent='合言葉が違います😢';
       document.getElementById('lock-input').value='';
